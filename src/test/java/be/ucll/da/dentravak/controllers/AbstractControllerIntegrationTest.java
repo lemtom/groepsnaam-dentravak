@@ -58,6 +58,21 @@ public abstract class AbstractControllerIntegrationTest {
         }
     }
 
+    protected String httpPut(String url, Object obj) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            HttpEntity<String> entity = new HttpEntity<String>(mapper.writeValueAsString(obj), headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    createURLWithPort(url),
+                    HttpMethod.PUT, entity, String.class);
+
+            return response.getBody();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private String createURLWithPort(String uri) {
         if(uri.startsWith("http")) return uri;
         return "http://localhost:" + port + uri;
