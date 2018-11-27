@@ -2,10 +2,9 @@ package be.ucll.da.dentravak.controllers;
 
 import be.ucll.da.dentravak.model.Sandwich;
 import be.ucll.da.dentravak.repositories.SandwichRepository;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 public class SandwichController {
@@ -27,4 +26,21 @@ public class SandwichController {
     }
 
 
+    @RequestMapping(value = "/sandwiches/{id}", method = RequestMethod.GET)
+    public Sandwich getSandwich(@PathVariable UUID id){
+        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException(id + "not found"));
+    }
+
+    @RequestMapping(value = "/sandwiches/{id}", method = RequestMethod.PUT)
+    public Sandwich updateSandwich(@RequestBody Sandwich newSandwich, @PathVariable UUID id){
+        return repository.findById(id).map(sandwich -> {
+            sandwich.setName(newSandwich.getName());
+            sandwich.setIngredients(newSandwich.getIngredients());
+            sandwich.setPrice(newSandwich.getPrice());
+            return repository.save(sandwich);
+        }).orElseGet(() -> {
+            newSandwich.setId(id);
+            return repository.save(newSandwich);
+        });
+    }
 }

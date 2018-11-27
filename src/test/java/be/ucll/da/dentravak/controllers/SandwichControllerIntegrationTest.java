@@ -46,7 +46,12 @@ public class SandwichControllerIntegrationTest extends AbstractControllerIntegra
 
     @Test
     public void testPutSandwich() throws JSONException {
-        throw new RuntimeException("Implement this test and then the production code");
+       // throw new RuntimeException("Implement this test and then the production code");
+        Sandwich sandwich = aSandwich().withName("Americain").withIngredients("Vlees").withPrice(4.0).build();
+        String expectedSandwichAsJson = "{\"id\":\"${json-unit.ignore}\",\"name\":\"Americain\",\"ingredients\":\"Vlees\",\"price\":4}";
+        String actualSandwichAsJson = httpPost("/sandwiches", sandwich);
+        assertThatJson(actualSandwichAsJson).isEqualTo(expectedSandwichAsJson);
+
     }
 
     @Test
