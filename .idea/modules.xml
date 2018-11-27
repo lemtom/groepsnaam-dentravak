@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dentravak.iml" filepath="$PROJECT_DIR$/.idea/modules/dentravak.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dentravak_main.iml" filepath="$PROJECT_DIR$/.idea/modules/dentravak_main.iml" group="dentravak" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dentravak_test.iml" filepath="$PROJECT_DIR$/.idea/modules/dentravak_test.iml" group="dentravak" />
+    </modules>
+  </component>
+</project>
