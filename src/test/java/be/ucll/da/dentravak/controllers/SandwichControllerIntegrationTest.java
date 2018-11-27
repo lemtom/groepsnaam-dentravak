@@ -52,10 +52,13 @@ public class SandwichControllerIntegrationTest extends AbstractControllerIntegra
         Sandwich sandwich = aSandwich().withName("Testkaas").withIngredients("Vlees").withPrice(4.0).build();
         String expectedSandwichAsJson = "{\"id\":\"${json-unit.ignore}\",\"name\":\"Testkaas\",\"ingredients\":\"Vlees\",\"price\":4}";
         String actualSandwichAsJson = httpPost("/sandwiches", sandwich);
+
+
         assertThatJson(actualSandwichAsJson).isEqualTo(expectedSandwichAsJson);
 //now updates
         sandwich = aSandwich().withName("Testkaas").withIngredients("Vlees").withPrice(5.0).build();
-        actualSandwichAsJson = httpPut("/sandwiches", sandwich);
+
+        actualSandwichAsJson = httpPut("/sandwiches/" + sandwichRepository.findByName(sandwich.getName()).get(0).getId(), sandwich);
 
         expectedSandwichAsJson = "{\"id\":\"${json-unit.ignore}\",\"name\":\"Testkaas\",\"ingredients\":\"Vlees\",\"price\":5}";
 
