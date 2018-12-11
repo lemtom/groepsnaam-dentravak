@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
 import javax.naming.ServiceUnavailableException;
+import java.net.URISyntaxException;
 import java.util.UUID;
 
 
@@ -66,6 +67,7 @@ public class SandwichController {
             return repository.save(newSandwich);
         });
     }
+
     // why comment: for testing
     @GetMapping("/getpreferences/{emailAddress}")
     public SandwichPreferences getPreferences(@PathVariable String emailAddress) throws RestClientException, ServiceUnavailableException {
@@ -76,10 +78,19 @@ public class SandwichController {
                 .getForEntity(service, SandwichPreferences.class)
                 .getBody();
     }
+
     public Optional<URI> recommendationServiceUrl() {
-        return discoveryClient.getInstances("recommendation")
-                .stream()
-                .map(si -> si.getUri())
-                .findFirst();
+        try {
+            return Optional.of(new URI("http://localhost:8081"));
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+//    public Optional<URI> recommendationServiceUrl() {
+//        return discoveryClient.getInstances("recommendation")
+//                .stream()
+//                .map(si -> si.getUri())
+//                .findFirst();
+//    }
 }
