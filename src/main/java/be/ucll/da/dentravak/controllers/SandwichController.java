@@ -3,7 +3,7 @@ package be.ucll.da.dentravak.controllers;
 import be.ucll.da.dentravak.model.Sandwich;
 import be.ucll.da.dentravak.model.SandwichPreferences;
 import be.ucll.da.dentravak.repositories.SandwichRepository;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+//import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -23,8 +23,8 @@ public class SandwichController {
 
 
     @Inject
-    private DiscoveryClient discoveryClient;
-    @Inject
+    //private DiscoveryClient discoveryClient;
+    //@Inject
     private SandwichRepository repository;
 
     @Inject
