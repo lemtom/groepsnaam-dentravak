@@ -11,12 +11,11 @@ import org.springframework.web.client.RestTemplate;
 import javax.inject.Inject;
 import javax.naming.ServiceUnavailableException;
 import java.net.URISyntaxException;
-import java.util.UUID;
+import java.util.*;
 
 
 import javax.naming.ServiceUnavailableException;
 import java.net.URI;
-import java.util.Optional;
 
 @RestController
 public class SandwichController {
@@ -37,7 +36,18 @@ public class SandwichController {
             SandwichPreferences preferences = getPreferences("ronald.dehuysser@ucll.be");
             //TODO: sort allSandwiches by float in preferences
             Iterable<Sandwich> allSandwiches = repository.findAll();
-            return allSandwiches;
+
+            Map<Float, Sandwich> sortedSandwiches = new TreeMap<>();
+
+            for (Sandwich s : allSandwiches) {
+                Float rating = preferences.getRatingForSandwich(s.getId());
+                sortedSandwiches.put(rating, s);
+            }
+
+            List sortedList = new ArrayList(sortedSandwiches.values());
+            Collections.reverse(sortedList);
+
+            return sortedList;
         } catch (ServiceUnavailableException e) {
             return repository.findAll();
         }
