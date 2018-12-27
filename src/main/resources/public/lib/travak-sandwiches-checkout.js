@@ -39,7 +39,7 @@ class DenTravakSandwichesCheckout extends DenTravakAbstractElement {
         //then doen met Response.status is 200
         .then((response) => {
             if(!response.ok) throw new Error(response.status);
-            else this.app().dispatchEvent(new CustomEvent('order-succeeded', {detail: this.sandwich}));
+            else this.app().dispatchEvent(new CustomEvent('order-succeeded', {detail: order}));
 
           })
         //this.app().dispatchEvent(new CustomEvent('order-succeeded', {detail: this.sandwich}));
