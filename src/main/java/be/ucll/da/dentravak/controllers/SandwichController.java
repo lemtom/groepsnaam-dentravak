@@ -43,8 +43,10 @@ public class SandwichController {
                 Float rating = preferences.getRatingForSandwich(s.getId());
                 if(rating == null){
                     rating = new Float(0.00);
+                    sortedSandwiches.put(rating, s);
+                }else{
+                    sortedSandwiches.put(rating, s);
                 }
-                sortedSandwiches.put(rating, s);
             }
 
             List sortedList = new ArrayList(sortedSandwiches.values());
