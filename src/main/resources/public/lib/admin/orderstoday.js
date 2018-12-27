@@ -68,7 +68,7 @@ function download_csv() {
 }
 
 function getCsv() {
-    fetch('den-travak/orders').then(response => response.json())
+    fetch('/den-travak/orders').then(response => response.json())
         .then(data => {
             console.log("dcsv");
             //console.log(data)
