@@ -41,9 +41,9 @@ public class SandwichController {
 
             for (Sandwich s : allSandwiches) {
                 Float rating = preferences.getRatingForSandwich(s.getId());
-
-                System.out.println(rating);
-
+                if(rating == null){
+                    rating = new Float(0.00);
+                }
                 sortedSandwiches.put(rating, s);
             }
 
