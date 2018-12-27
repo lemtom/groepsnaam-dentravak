@@ -8,7 +8,7 @@ class DenTravakOrderList extends DenTravakAbstractElement {
 
     connectedCallback() {
         super.connectedCallback();
-        fetch('http://localhost:8080/orders')
+        fetch('http://localhost:8080/den-travak/orders')
             .then(resp => resp.json())
             .then(json => this.updateOrderList(json));
         this.initEventListeners();

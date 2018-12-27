@@ -29,7 +29,7 @@ class DenTravakSandwichesCheckout extends DenTravakAbstractElement {
         order.mobilePhoneNumber = this.byCss('input[id="mobile-phone-number"]').value;
 
         //
-        fetch('http://localhost:8080/orders', {
+        fetch('http://localhost:8080/den-travak/orders', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
