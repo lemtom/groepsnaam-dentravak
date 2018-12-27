@@ -30,7 +30,7 @@ class DenTravakEditSandwich extends DenTravakAbstractElement {
 
 
 		console.log(JSON.stringify(sandwich));
-        fetch('http://localhost:8080/den-travak/sandwiches', {
+        fetch('/den-travak/sandwiches', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
