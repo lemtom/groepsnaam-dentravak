@@ -26,6 +26,10 @@
     <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter-consul-discovery:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:8.0.13" level="project" />
     <orderEntry type="library" name="Gradle: com.h2database:h2:1.4.197" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter-netflix-ribbon:2.0.1.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: com.netflix.ribbon:ribbon:2.2.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.netflix.ribbon:ribbon-transport:2.2.5" level="project" />
+    <orderEntry type="library" name="Gradle: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-test:2.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: net.javacrumbs.json-unit:json-unit:2.0.3" level="project" />
     <orderEntry type="library" name="Gradle: net.javacrumbs.json-unit:json-unit-assertj:2.0.3" level="project" />
@@ -33,7 +37,6 @@
     <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-netflix-core:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-aop:2.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-jdbc:2.0.5.RELEASE" level="project" />
-    <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter-netflix-ribbon:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter-netflix-archaius:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter:2.0.5.RELEASE" level="project" />
@@ -79,9 +82,7 @@
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.6" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.6" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.6" level="project" />
-    <orderEntry type="library" name="Gradle: com.netflix.ribbon:ribbon:2.2.5" level="project" />
     <orderEntry type="library" name="Gradle: com.netflix.ribbon:ribbon-httpclient:2.2.5" level="project" />
-    <orderEntry type="library" name="Gradle: com.netflix.ribbon:ribbon-transport:2.2.5" level="project" />
     <orderEntry type="library" name="Gradle: com.netflix.ribbon:ribbon-loadbalancer:2.2.5" level="project" />
     <orderEntry type="library" name="Gradle: com.netflix.ribbon:ribbon-core:2.2.5" level="project" />
     <orderEntry type="library" name="Gradle: com.netflix.hystrix:hystrix-core:1.4.3" level="project" />
@@ -136,7 +137,6 @@
     <orderEntry type="library" name="Gradle: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-rsa:1.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-netflix-archaius:2.0.1.RELEASE" level="project" />
-    <orderEntry type="library" name="Gradle: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:16.0.1" level="project" />
     <orderEntry type="library" name="Gradle: commons-collections:commons-collections:3.2.2" level="project" />
     <orderEntry type="library" name="Gradle: com.sun.jersey:jersey-client:1.19.1" level="project" />

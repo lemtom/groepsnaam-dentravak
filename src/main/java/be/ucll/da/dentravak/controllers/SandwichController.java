@@ -22,8 +22,8 @@ public class SandwichController {
 
 
     @Inject
-    //private DiscoveryClient discoveryClient;
-    //@Inject
+    private DiscoveryClient discoveryClient;
+    @Inject
     private SandwichRepository repository;
 
     @Inject
