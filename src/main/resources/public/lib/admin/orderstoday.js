@@ -5,7 +5,7 @@ getOrders();
 //}, 3000);
 
 function getOrders() {
-    fetch('http://localhost:8080/den-travak/orders').then(response => response.json())
+    fetch('/den-travak/orders').then(response => response.json())
         .then(data => {
             
             console.log(data);
