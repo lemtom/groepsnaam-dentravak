@@ -1,25 +1,16 @@
-console.log("test");
 getOrders();
-//setTimeout(function() {
-//    getOrders()
-//}, 3000);
 
 function getOrders() {
     fetch('/den-travak/orders').then(response => response.json())
         .then(data => {
-            
-            console.log(data);
+            //console.log(data);
             filterOrders(data);
-
         })
 }
 
 function filterOrders(data) {
 
     var table = document.getElementById("orders");
-    while (table.hasChildNodes()) {
-        table.removeChild(table.lastChild);
-    }
 
     var today = new Date();
     today.setHours(1, 0, 0);
@@ -29,9 +20,8 @@ function filterOrders(data) {
         var date = new Date(product.creationDate);
         return (date >= today && date <= tomorrow);
     });
-    console.log(filteredData);
-
-    for (i = 0; i < filteredData.length; i++) {
+	var start = 0 + table.childNodes.length;
+    for (i = start; i < filteredData.length; i++) {
         var name = filteredData[i].name + " (" + filteredData[i].breadType + ")";
         var price = filteredData[i].price;
         var number = filteredData[i].mobilePhoneNumber;
@@ -47,41 +37,37 @@ function filterOrders(data) {
         numberCell.innerHTML = number;
         tableRow.appendChild(numberCell);
         table.appendChild(tableRow);
-
-
     }
 }
 
-function download_csv() {
-    var csv = 'Name,Title\n';
-    data.forEach(function(row) {
-            csv += row.join(',');
-            csv += "\n";
-    });
- 
-    console.log(csv);
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-    hiddenElement.target = '_blank';
-    hiddenElement.download = 'people.csv';
-    hiddenElement.click();
-}
-
 function getCsv() {
+	getOrders();
     fetch('/den-travak/orders').then(response => response.json())
         .then(data => {
-            console.log("dcsv");
-            //console.log(data)
             generateCsv(data);
-
         })
 }
 
-function generateCsv(data){
-	var replacer = (key, value) => value === null ? '' : value;
-	var header = Object.keys(data[0]);
-	let csv = data.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
-	csv.unshift(header.join(','));
-	csv = csv.join('\r\n');
-	window.open('data:text/csv;charset=utf-8,' + escape(csv));
+function generateCsv(data) {
+    if (!document.getElementById("csvheader")) {
+        var tableheader = document.getElementById("tableheaderrow");
+        var csvHeader = document.createElement("th");
+        csvHeader.innerHTML = "Printed?";
+        csvHeader.id = "csvheader";
+        tableheader.appendChild(csvHeader);
+    }
+    var table = document.getElementById("orders");
+    for (i = 0; i < table.childNodes.length; i++) {
+        if (table.childNodes[i].childNodes.length == 3) {
+            var printedCell = document.createElement("td");
+            printedCell.innerHTML = "true";
+            table.childNodes[i].appendChild(printedCell);
+        }
+    };
+    var replacer = (key, value) => value === null ? '' : value;
+    var header = Object.keys(data[0]);
+    let csv = data.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
+    csv.unshift(header.join(','));
+    csv = csv.join('\r\n');
+    window.open('data:text/csv;charset=utf-8,' + escape(csv));
 }
