@@ -34,9 +34,31 @@ public class SandwichController {
 
         try {
             SandwichPreferences preferences = getPreferences("ronald.dehuysser@ucll.be");
-            //TODO: sort allSandwiches by float in preferences
             Iterable<Sandwich> allSandwiches = repository.findAll();
+            ArrayList<Sandwich> sandwiches = new ArrayList<>();
+            for (Sandwich s : allSandwiches) {
+                sandwiches.add(s);
+            };
 
+            Collections.sort(sandwiches, new Comparator<Sandwich>() {
+                @Override
+                public int compare(Sandwich s2, Sandwich s1)
+                {
+                    Float rating1 = preferences.getRatingForSandwich(s1.getId());
+                    Float rating2 = preferences.getRatingForSandwich(s2.getId());
+                    if(rating1 == null){
+                        rating1 = new Float(0.00);
+                    }
+                    if(rating2 == null){
+                        rating2 = new Float(0.00);
+                    }
+                    return  rating1.compareTo(rating2);
+                }
+            });
+            Collections.reverse(sandwiches);
+
+            return sandwiches;
+            /*
             Map<Float, Sandwich> sortedSandwiches = new TreeMap<>();
 
             for (Sandwich s : allSandwiches) {
@@ -50,9 +72,11 @@ public class SandwichController {
             }
 
             List sortedList = new ArrayList(sortedSandwiches.values());
-            Collections.reverse(sortedList);
+                        Collections.reverse(sortedList);
 
             return sortedList;
+            */
+
         } catch (ServiceUnavailableException e) {
             return repository.findAll();
         }
