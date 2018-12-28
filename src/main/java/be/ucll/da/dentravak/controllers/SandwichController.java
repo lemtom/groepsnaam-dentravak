@@ -33,7 +33,7 @@ public class SandwichController {
     public Iterable<Sandwich> sandwiches() {
 
         try {
-            SandwichPreferences preferences = getPreferences("ronald.dehuysser@ucll.be");
+            SandwichPreferences preferences = getPreferences("nummer");
             Iterable<Sandwich> allSandwiches = repository.findAll();
             ArrayList<Sandwich> sandwiches = new ArrayList<>();
             for (Sandwich s : allSandwiches) {
