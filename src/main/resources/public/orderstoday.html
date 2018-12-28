@@ -1,25 +1,22 @@
 <!doctype html>
-
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-
-  <title>Orders today</title>
-
-</head>
-
-<body>
-  <table>
-                <thead>
-                <tr>
-                    <th>Order</th>
-                    <th>Price</th>
-                    <th>Number</th>
-                </tr>
-                </thead>
-                <tbody id="orders"></tbody>
-</table>
- <input type="button" id="getCSV" value="Get CSV" onclick="getCsv();">
-  <script src="/den-travak/lib/admin/orderstoday.js"></script>
-</body>
+   <head>
+      <meta charset="utf-8">
+      <title>Orders for today</title>
+   </head>
+   <body>
+      <table>
+         <thead>
+            <tr id="tableheaderrow">
+               <th>Order</th>
+               <th>Price</th>
+               <th>Number</th>
+            </tr>
+         </thead>
+         <tbody id="orders"></tbody>
+      </table>
+      <input type="button" id="refresh" value="Refresh" onclick="getOrders();">
+      <input type="button" id="getCSV" value="Print my orders for today" onclick="getCsv();">
+      <script src="/den-travak/lib/admin/orderstoday.js"></script>
+   </body>
 </html>
