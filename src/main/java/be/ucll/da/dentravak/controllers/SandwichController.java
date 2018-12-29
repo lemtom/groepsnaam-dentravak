@@ -44,9 +44,7 @@ public class SandwichController {
                 @Override
                 public int compare(Sandwich s1, Sandwich s2)
                 {
-                    if(s1 == null || s2 == null){
-                        return 0;
-                    }else {
+                    try {
                         Float rating1 = preferences.getRatingForSandwich(s1.getId());
                         Float rating2 = preferences.getRatingForSandwich(s2.getId());
                         if (rating1 == null) {
@@ -56,6 +54,8 @@ public class SandwichController {
                             rating2 = new Float(0.00);
                         }
                         return rating1.compareTo(rating2);
+                    }catch(Exception e){
+                        return 0;
                     }
                 }
             });
