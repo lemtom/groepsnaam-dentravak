@@ -53,7 +53,7 @@ public class SandwichController {
                         rating2 = new Float(0.00);
                     }
                     //return rating1.compareTo(rating2);
-                    return Float.compare(rating1, rating2);
+                    return (int) (rating1 - rating2);
                 }
             });
 
