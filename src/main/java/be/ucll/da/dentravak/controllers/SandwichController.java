@@ -42,17 +42,21 @@ public class SandwichController {
 
             Collections.sort(sandwiches, new Comparator<Sandwich>() {
                 @Override
-                public int compare(Sandwich s2, Sandwich s1)
+                public int compare(Sandwich s1, Sandwich s2)
                 {
-                    Float rating1 = preferences.getRatingForSandwich(s1.getId());
-                    Float rating2 = preferences.getRatingForSandwich(s2.getId());
-                    if(rating1 == null){
-                        rating1 = new Float(0.00);
+                    if(s1 == null || s2 == null){
+                        return 0;
+                    }else {
+                        Float rating1 = preferences.getRatingForSandwich(s1.getId());
+                        Float rating2 = preferences.getRatingForSandwich(s2.getId());
+                        if (rating1 == null) {
+                            rating1 = new Float(0.00);
+                        }
+                        if (rating2 == null) {
+                            rating2 = new Float(0.00);
+                        }
+                        return rating1.compareTo(rating2);
                     }
-                    if(rating2 == null){
-                        rating2 = new Float(0.00);
-                    }
-                    return  rating1.compareTo(rating2);
                 }
             });
             Collections.reverse(sandwiches);
