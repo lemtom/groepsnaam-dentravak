@@ -35,7 +35,7 @@ public class SandwichController {
         try {
             SandwichPreferences preferences = getPreferences("nummer");
             Iterable<Sandwich> allSandwiches = repository.findAll();
-            ArrayList<Sandwich> sandwiches = new ArrayList<>();
+            List<Sandwich> sandwiches = new ArrayList<>();
             for (Sandwich s : allSandwiches) {
                 sandwiches.add(s);
             };
