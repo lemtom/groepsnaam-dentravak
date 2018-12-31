@@ -3,6 +3,7 @@ package be.ucll.da.dentravak.controllers;
 import be.ucll.da.dentravak.model.Sandwich;
 import be.ucll.da.dentravak.model.SandwichPreferences;
 import be.ucll.da.dentravak.repositories.SandwichRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
@@ -21,12 +22,12 @@ import java.net.URI;
 public class SandwichController {
 
 
-    @Inject
+    @Autowired
     private DiscoveryClient discoveryClient;
-    @Inject
+    @Autowired
     private SandwichRepository repository;
 
-    @Inject
+    @Autowired
     private RestTemplate restTemplate;
 
     @RequestMapping("/sandwiches")
@@ -35,55 +36,21 @@ public class SandwichController {
         try {
             SandwichPreferences preferences = getPreferences("nummer");
             Iterable<Sandwich> allSandwiches = repository.findAll();
-            List<Sandwich> sandwiches = new ArrayList<>();
-            for (Sandwich s : allSandwiches) {
-                sandwiches.add(s);
-            };
-
-            Collections.sort(sandwiches, new Comparator<Sandwich>() {
-                @Override
-                public int compare(Sandwich s1, Sandwich s2)
-                {
-                    Float rating1 = preferences.getRatingForSandwich(s1.getId());
-                    Float rating2 = preferences.getRatingForSandwich(s2.getId());
-                    if (rating1 == null) {
-                        rating1 = new Float(0.00);
-                    }
-                    if (rating2 == null) {
-                        rating2 = new Float(0.00);
-                    }
-                    //return rating1.compareTo(rating2);
-                    return (int) (rating1 - rating2);
-                }
-            });
-
-            Collections.reverse(sandwiches);
-
-            return sandwiches;
-            /*
-            Map<Float, Sandwich> sortedSandwiches = new TreeMap<>();
-
-            for (Sandwich s : allSandwiches) {
-                Float rating = preferences.getRatingForSandwich(s.getId());
-                if(rating == null){
-                    rating = new Float(0.00);
-                    sortedSandwiches.put(rating, s);
-                }else{
-                    sortedSandwiches.put(rating, s);
-                }
-            }
-
-            List sortedList = new ArrayList(sortedSandwiches.values());
-                        Collections.reverse(sortedList);
-
-            return sortedList;
-            */
-
-        } catch (ServiceUnavailableException e) {
+            List<Sandwich> sandwichList = (List<Sandwich>) allSandwiches;
+            List<Sandwich> sandwichesSorted = sortSandwiches(preferences, sandwichList);
+            return sandwichesSorted;
+        } catch (Exception e) {
             return repository.findAll();
         }
 
     }
+
+
+    List<Sandwich> sortSandwiches(SandwichPreferences preferences, List<Sandwich> sandwiches) {
+        Collections.sort(sandwiches,(Sandwich s1, Sandwich s2) -> preferences.getRatingForSandwich(s2.getId()).compareTo(preferences.getRatingForSandwich(s1.getId())));
+        return sandwiches;
+    }
+
 
     @RequestMapping(value = "/sandwiches", method = RequestMethod.POST)
     public Sandwich createSandwich(@RequestBody Sandwich sandwich) {
