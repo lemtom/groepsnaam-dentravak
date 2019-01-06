@@ -39,7 +39,7 @@ public class SandwichController {
             List<Sandwich> sandwichList = (List<Sandwich>) allSandwiches;
             List<Sandwich> sandwichesSorted = sortSandwiches(preferences, sandwichList);
             return sandwichesSorted;
-        } catch (Exception e) {
+        } catch (ServiceUnavailableException e) {
             return repository.findAll();
         }
 
