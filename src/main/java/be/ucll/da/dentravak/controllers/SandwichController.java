@@ -47,7 +47,14 @@ public class SandwichController {
 
 
     List<Sandwich> sortSandwiches(SandwichPreferences preferences, List<Sandwich> sandwiches) {
-        Collections.sort(sandwiches,(Sandwich s1, Sandwich s2) -> preferences.getRatingForSandwich(s2.getId()).compareTo(preferences.getRatingForSandwich(s1.getId())));
+        //Collections.sort(sandwiches,(Sandwich s1, Sandwich s2) -> preferences.getRatingForSandwich(s2.getId()).compareTo(preferences.getRatingForSandwich(s1.getId())));
+        Comparator<Sandwich> sandwichComparator
+                = Comparator.comparing((Sandwich sandwich) -> preferences.getRatingForSandwich(sandwich.getId()));
+        Comparator<Sandwich> sandwichComparatorNullFirst
+                = Comparator.nullsFirst(sandwichComparator);
+        Comparator<Sandwich> sandwichComparatorReversed
+                = sandwichComparatorNullFirst.reversed();
+        sandwiches.sort(sandwichComparatorReversed);
         return sandwiches;
     }
 
