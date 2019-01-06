@@ -41,20 +41,28 @@ public class SandwichController {
             return sandwichesSorted;
         } catch (ServiceUnavailableException e) {
             return repository.findAll();
+        } catch (NullPointerException e) {
+            return repository.findAll();
         }
 
     }
 
 
     List<Sandwich> sortSandwiches(SandwichPreferences preferences, List<Sandwich> sandwiches) {
-        //Collections.sort(sandwiches,(Sandwich s1, Sandwich s2) -> preferences.getRatingForSandwich(s2.getId()).compareTo(preferences.getRatingForSandwich(s1.getId())));
-        Comparator<Sandwich> sandwichComparator
-                = Comparator.comparing((Sandwich sandwich) -> preferences.getRatingForSandwich(sandwich.getId()));
-        Comparator<Sandwich> sandwichComparatorNullFirst
-                = Comparator.nullsFirst(sandwichComparator);
-        Comparator<Sandwich> sandwichComparatorReversed
-                = sandwichComparatorNullFirst.reversed();
-        sandwiches.sort(sandwichComparatorReversed);
+        Collections.sort(sandwiches, new Comparator<Sandwich>() {
+            @Override
+            public int compare(Sandwich o1, Sandwich o2) {
+                if (preferences.getRatingForSandwich(o1.getId()) == null && preferences.getRatingForSandwich(o2.getId()) == null) {
+                    return 0;
+                }
+                if (preferences.getRatingForSandwich(o1.getId()) == null) {
+                    return 1;
+                }
+                if (preferences.getRatingForSandwich(o2.getId()) == null) {
+                    return -1;
+                }
+                return preferences.getRatingForSandwich(o1.getId()).compareTo(preferences.getRatingForSandwich(o2.getId()));
+            }});
         return sandwiches;
     }
 
