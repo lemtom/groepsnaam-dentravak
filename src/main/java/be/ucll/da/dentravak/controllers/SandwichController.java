@@ -61,7 +61,7 @@ public class SandwichController {
                 if (preferences.getRatingForSandwich(o2.getId()) == null) {
                     return -1;
                 }
-                return preferences.getRatingForSandwich(o1.getId()).compareTo(preferences.getRatingForSandwich(o2.getId()));
+                return preferences.getRatingForSandwich(o2.getId()).compareTo(preferences.getRatingForSandwich(o1.getId()));
             }});
         return sandwiches;
     }
